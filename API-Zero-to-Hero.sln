@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Application", "Movies.Application\Movies.Application.csproj", "{FBBC8A62-A11F-4300-93BF-82700AE762C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Api", "Movies.Api\Movies.Api.csproj", "{F3843791-EDA7-46CD-8C4C-3294D48CDED3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{703B405D-6FFD-4094-9176-AC92C12A5525}"
+	ProjectSection(SolutionItems) = preProject
+		Helpers\Course.postman_collection.json = Helpers\Course.postman_collection.json
+		Helpers\movies.json = Helpers\movies.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Contracts", "Movies.Contracts\Movies.Contracts.csproj", "{5FD11E8D-535E-41D6-A686-C868DBABF528}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBBC8A62-A11F-4300-93BF-82700AE762C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBBC8A62-A11F-4300-93BF-82700AE762C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBBC8A62-A11F-4300-93BF-82700AE762C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBBC8A62-A11F-4300-93BF-82700AE762C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3843791-EDA7-46CD-8C4C-3294D48CDED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3843791-EDA7-46CD-8C4C-3294D48CDED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3843791-EDA7-46CD-8C4C-3294D48CDED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3843791-EDA7-46CD-8C4C-3294D48CDED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
