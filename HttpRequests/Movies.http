@@ -1,0 +1,48 @@
+### CREATE MOVIE
+POST http://localhost:5072/api/movies
+Content-Type: application/json
+
+{
+  "title": "Matrix 4",
+  "yearOfRelease": "1921",
+  "genres": [
+    "Action"
+  ]
+}
+
+
+### GET MOVIES
+GET http://localhost:5072/api/movies
+Content-Type: application/json
+
+
+### GET MOVIE
+< {% request.variables.set("id", "ff1af317-1fc3-492e-b31f-a1d0b0eb2f79") %}
+
+GET http://localhost:5072/api/movies/{{id}}
+Content-Type: application/json
+
+
+### UPDATE MOVIE
+< {% request.variables.set("id", "ff1af317-1fc3-492e-b31f-a1d0b0eb2f79") %}
+
+PUT http://localhost:5072/api/movies/{{id}}
+Content-Type: application/json
+
+{
+  "title": "The Matrix 4",
+  "yearOfRelease": "2021",
+  "genres": [
+    "Action",
+    "Sci-Fi",
+    "Thriller"
+  ]
+}
+
+
+### DELETE MOVIE
+< {% request.variables.set("id", "ff1af317-1fc3-492e-b31f-a1d0b0eb2f79") %}
+
+DELETE http://localhost:5072/api/movies/{{id}}
+Content-Type: application/json
+
