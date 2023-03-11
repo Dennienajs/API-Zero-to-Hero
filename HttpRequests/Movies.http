@@ -3,8 +3,8 @@ POST http://localhost:5072/api/movies
 Content-Type: application/json
 
 {
-  "title": "Matrix 4",
-  "yearOfRelease": "1921",
+  "title": "Matrix",
+  "yearOfRelease": "1999",
   "genres": [
     "Action"
   ]
@@ -17,14 +17,14 @@ Content-Type: application/json
 
 
 ### GET MOVIE
-< {% request.variables.set("idOrSlug", "matrix-4-1921") %}
+< {% request.variables.set("idOrSlug", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
 
 GET http://localhost:5072/api/movies/{{idOrSlug}}
 Content-Type: application/json
 
 
 ### UPDATE MOVIE
-< {% request.variables.set("id", "8b94dc64-d3fe-4e86-8c67-5ef97ba8a8e9") %}
+< {% request.variables.set("id", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
 
 PUT http://localhost:5072/api/movies/{{id}}
 Content-Type: application/json
@@ -41,7 +41,7 @@ Content-Type: application/json
 
 
 ### DELETE MOVIE
-< {% request.variables.set("id", "8b94dc64-d3fe-4e86-8c67-5ef97ba8a8e9") %}
+< {% request.variables.set("id", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
 
 DELETE http://localhost:5072/api/movies/{{id}}
 Content-Type: application/json
