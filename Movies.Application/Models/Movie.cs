@@ -10,6 +10,9 @@ public partial class Movie
     public required int YearOfRelease { get; set; }
     public List<string> Genres { get; init; } = new();
     
+    public float? AverageRating { get; set; }
+    public int? UserRating { get; set; }
+
     private string GenerateSlug()
     {
         var slug = SlugRegex()

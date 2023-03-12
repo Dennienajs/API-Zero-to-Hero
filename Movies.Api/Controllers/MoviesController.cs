@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Movies.Api.Auth;
 using Movies.Api.Mapping;
 using Movies.Application.Services;
 using Movies.Contracts.Requests;
 
 namespace Movies.Api.Controllers;
 
-[ApiController]
-public class MoviesController : ControllerBase
+public class MoviesController : ApiControllerBase
 {
     private readonly IMovieService _movieService;
     
@@ -30,8 +30,8 @@ public class MoviesController : ControllerBase
     public async Task<IActionResult> Get([FromRoute] string idOrSlug, CancellationToken cancellationToken)
     {
         var movie = Guid.TryParse(idOrSlug, out var id) 
-            ? await _movieService.GetByIdAsync(id, cancellationToken) 
-            : await _movieService.GetBySlugAsync(idOrSlug, cancellationToken);
+            ? await _movieService.GetByIdAsync(id, UserId, cancellationToken) 
+            : await _movieService.GetBySlugAsync(idOrSlug, UserId, cancellationToken);
         
         return movie is not null
             ? Ok(movie.MapToResponse()) 
@@ -41,7 +41,7 @@ public class MoviesController : ControllerBase
     [HttpGet(Endpoints.Movies.GetAll)]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        return Ok((await _movieService.GetAllAsync(cancellationToken)).MapToResponse());
+        return Ok((await _movieService.GetAllAsync(UserId, cancellationToken)).MapToResponse());
     }
 
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
@@ -52,7 +52,7 @@ public class MoviesController : ControllerBase
         CancellationToken cancellationToken)
     {
         var movie = request.MapToMovie(id);
-        var updatedMovie = await _movieService.UpdateAsync(movie, cancellationToken);
+        var updatedMovie = await _movieService.UpdateAsync(movie, UserId, cancellationToken);
             
         return updatedMovie is not null
             ? Ok(updatedMovie.MapToResponse()) 

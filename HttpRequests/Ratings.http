@@ -1,0 +1,24 @@
+### RATE MOVIE
+< {% request.variables.set("id", "f43b5847-9b3d-4787-a536-3ece7197c888") %}
+
+PUT {{host}}/{{movies}}/{{id}}/ratings
+Content-Type: application/json
+Authorization: Bearer {{trustedToken}}
+
+{
+  "rating": 5
+}
+
+
+### DELETE RATING
+< {% request.variables.set("id", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
+
+DELETE {{host}}/{{movies}}/{{id}}/ratings
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+
+### GET USER RATINGS
+GET {{host}}/{{ratings}}/me
+Content-Type: application/json
+Authorization: Bearer {{trustedToken}}

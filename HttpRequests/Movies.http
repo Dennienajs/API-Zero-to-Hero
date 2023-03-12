@@ -18,13 +18,16 @@ Authorization: Bearer {{userToken}}
 ### GET MOVIES
 GET {{host}}/{{movies}}
 Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
 
 
 ### GET MOVIE - ID
-< {% request.variables.set("idOrSlug", "055df922-00e0-4cef-87b7-9836ab957a6c") %}
+< {% request.variables.set("idOrSlug", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
+Authorization: Bearer {{userToken}}
 
 
 ### GET MOVIE - SLUG
@@ -32,10 +35,11 @@ Content-Type: application/json
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
+Authorization: Bearer {{userToken}}
 
 
 ### UPDATE MOVIE
-< {% request.variables.set("id", "f43b5847-9b3d-4787-a536-3ece7197c888") %}
+< {% request.variables.set("id", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
 
 PUT {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
@@ -53,9 +57,9 @@ Authorization: Bearer {{adminToken}}
 
 
 ### DELETE MOVIE
-< {% request.variables.set("id", "055df922-00e0-4cef-87b7-9836ab957a6c") %}
+< {% request.variables.set("id", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
 
 DELETE {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
-Authorization: Bearer {{adminToken}}
+Authorization: Bearer {{userToken}}
 

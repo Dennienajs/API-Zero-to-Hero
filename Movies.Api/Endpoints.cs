@@ -17,5 +17,15 @@ public static class Endpoints
         public const string Create = Base;
         public const string Update = ById;
         public const string Delete = ById;
+        
+        public const string Rate = ById + "/ratings";
+        public const string DeleteRating = ById + "/ratings";
+    }
+    
+    public static class Ratings
+    {
+        private const string Base = ApiBase + "/ratings";
+
+        public const string GetUserRatings = Base + "/me";
     }
 }
