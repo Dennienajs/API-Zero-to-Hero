@@ -1,0 +1,41 @@
+### GENERATE TOKEN - TRUSTED MEMBER
+POST {{identityEndpoint}}
+Content-Type: application/json
+
+{
+  "userId": "b5cf59fd-7805-4a82-8d9c-271887e96bb3",
+  "email": "trusted@dch.com",
+  "customClaims": {
+    "admin": false,
+    "trusted_member": true
+  }
+}
+
+
+### GENERATE TOKEN - ADMIN
+POST {{identityEndpoint}}
+Content-Type: application/json
+
+{
+  "userId": "45a57255-29c6-43d8-b17a-4e65698bd182",
+  "email": "admin@dch.com",
+  "customClaims": {
+    "admin": true,
+    "trusted_member": true
+  }
+}
+
+
+### GENERATE TOKEN - USER
+POST {{identityEndpoint}}
+Content-Type: application/json
+
+{
+  "userId": "a5241a0f-f23e-4b99-b153-975272d052ee",
+  "email": "user@dch.com",
+  "customClaims": {
+    "admin": false,
+    "trusted_member": false
+  }
+}
+

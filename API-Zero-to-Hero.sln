@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{703B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Contracts", "Movies.Contracts\Movies.Contracts.csproj", "{5FD11E8D-535E-41D6-A686-C868DBABF528}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "Helpers\Identity.Api\Identity.Api.csproj", "{06AB0C9D-5E54-4388-8D02-5189831CC994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,12 @@ Global
 		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FD11E8D-535E-41D6-A686-C868DBABF528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06AB0C9D-5E54-4388-8D02-5189831CC994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06AB0C9D-5E54-4388-8D02-5189831CC994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06AB0C9D-5E54-4388-8D02-5189831CC994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06AB0C9D-5E54-4388-8D02-5189831CC994}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06AB0C9D-5E54-4388-8D02-5189831CC994} = {703B405D-6FFD-4094-9176-AC92C12A5525}
 	EndGlobalSection
 EndGlobal

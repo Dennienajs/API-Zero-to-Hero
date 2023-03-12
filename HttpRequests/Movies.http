@@ -1,10 +1,14 @@
+# VARIABLES DEFINED IN `http-client.private.env.json` for ease of use.
+# GET TOKEN BY USING `Helpers/Identity.Api/token` or `Identity.http` file.
+
 ### CREATE MOVIE
-POST http://localhost:5072/api/movies
+POST {{host}}/{{movies}}
 Content-Type: application/json
+Authorization: Bearer {{userToken}}
 
 {
-  "title": "Matrix",
-  "yearOfRelease": "1999",
+  "title": "Avengers: Endgame",
+  "yearOfRelease": "2019",
   "genres": [
     "Action"
   ]
@@ -12,37 +16,46 @@ Content-Type: application/json
 
 
 ### GET MOVIES
-GET http://localhost:5072/api/movies
+GET {{host}}/{{movies}}
 Content-Type: application/json
 
 
-### GET MOVIE
-< {% request.variables.set("idOrSlug", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
+### GET MOVIE - ID
+< {% request.variables.set("idOrSlug", "055df922-00e0-4cef-87b7-9836ab957a6c") %}
 
-GET http://localhost:5072/api/movies/{{idOrSlug}}
+GET {{host}}/{{movies}}/{{idOrSlug}}
+Content-Type: application/json
+
+
+### GET MOVIE - SLUG
+< {% request.variables.set("idOrSlug", "avengers-endgame-2019") %}
+
+GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
 
 
 ### UPDATE MOVIE
-< {% request.variables.set("id", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
+< {% request.variables.set("id", "f43b5847-9b3d-4787-a536-3ece7197c888") %}
 
-PUT http://localhost:5072/api/movies/{{id}}
+PUT {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
 {
-  "title": "The Matrix 4",
-  "yearOfRelease": "2021",
+  "title": "Avengers: Endgame",
+  "yearOfRelease": "2019",
   "genres": [
     "Action",
-    "Sci-Fi",
-    "Thriller"
+    "Adventure",
+    "Sci-Fi"
   ]
 }
 
 
 ### DELETE MOVIE
-< {% request.variables.set("id", "0aa3e1ff-c494-4d56-a6d5-6ef8593863e6") %}
+< {% request.variables.set("id", "055df922-00e0-4cef-87b7-9836ab957a6c") %}
 
-DELETE http://localhost:5072/api/movies/{{id}}
+DELETE {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
+Authorization: Bearer {{adminToken}}
 
