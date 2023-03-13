@@ -75,6 +75,9 @@ public class DbInitializer
             await _movieRepository.CreateAsync(movie);
             Console.WriteLine($"Created movie: {movie.Title}, {movie.YearOfRelease}");
         }
+        
+        Console.WriteLine($"Created {newMovies.Count} movies!");
+
     }
 
     private static IEnumerable<Movie> GetMoviesData()

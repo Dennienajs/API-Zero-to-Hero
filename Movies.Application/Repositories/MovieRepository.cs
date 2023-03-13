@@ -9,7 +9,7 @@ public interface IMovieRepository
     Task<bool> CreateAsync(Movie movie, CancellationToken cancellationToken = default);
     Task<Movie?> GetByIdAsync(Guid id, Guid? userId = default, CancellationToken cancellationToken = default);
     Task<Movie?> GetBySlugAsync(string slug, Guid? userId = default, CancellationToken cancellationToken = default);
-    Task<IEnumerable<Movie>> GetAllAsync(Guid? userId = default, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Movie>> GetAllAsync(GetAllMoviesOptions options, CancellationToken cancellationToken = default);
     Task<bool> UpdateAsync(Movie movie, CancellationToken cancellationToken = default);
     Task<bool> DeleteByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task<bool> ExistsByIdAsync(Guid id, CancellationToken cancellationToken = default);
@@ -122,7 +122,7 @@ public class MovieRepository : IMovieRepository
     }
     
 
-    public async Task<IEnumerable<Movie>> GetAllAsync(Guid? userId = default, CancellationToken token = default)
+    public async Task<IEnumerable<Movie>> GetAllAsync(GetAllMoviesOptions options, CancellationToken token = default)
     {
         using var connection = await _dbConnectionFactory.CreateConnectionAsync(token);
         
@@ -135,9 +135,19 @@ public class MovieRepository : IMovieRepository
             left join genres g on m.id = g.movieId
             left join ratings r on m.id = r.movieId
             left join ratings myr on m.id = myr.movieId
-                and myr.userid = @userId
-            group by id, userRating
-            """, new { userId }, cancellationToken: token));
+                and myr.userid = @userid
+            
+            where (@title is null or LOWER(m.title) like ('%' || @title || '%'))
+            and  (@yearofrelease is null or m.yearofrelease = @yearofrelease)
+            
+            group by id, userrating
+            """, 
+            new
+            {
+                userId = options.UserId,
+                title = options.Title?.ToLower(),
+                yearofrelease = options.YearOfRelease,
+            }, cancellationToken: token));
         
         return result.Select(x => new Movie
         {

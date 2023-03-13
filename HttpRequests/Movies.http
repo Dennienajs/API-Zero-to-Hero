@@ -4,7 +4,7 @@
 ### CREATE MOVIE
 POST {{host}}/{{movies}}
 Content-Type: application/json
-Authorization: Bearer {{userToken}}
+Authorization: Bearer {{trustedToken}}
 
 {
   "title": "Avengers: Endgame",
@@ -19,6 +19,12 @@ Authorization: Bearer {{userToken}}
 GET {{host}}/{{movies}}
 Content-Type: application/json
 Authorization: Bearer {{userToken}}
+
+### GET MOVIES
+GET {{host}}/{{movies}}?title=b&yearOfRelease=1995
+Content-Type: application/json
+#Authorization: Bearer {{userToken}}
+
 
 
 

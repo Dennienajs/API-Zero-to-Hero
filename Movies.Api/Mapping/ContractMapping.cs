@@ -49,4 +49,11 @@ public static class ContractMapping
         Slug = movieRating.Slug,
         Rating = movieRating.Rating
     };
+    
+    public static GetAllMoviesOptions MapToOptions(this GetAllMoviesRequest request, Guid? userId = null) => new()
+    {
+        UserId = userId,
+        Title = request.Title,
+        YearOfRelease = request.YearOfRelease
+    };
 }
