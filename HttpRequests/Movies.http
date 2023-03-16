@@ -20,10 +20,18 @@ GET {{host}}/{{movies}}
 Content-Type: application/json
 Authorization: Bearer {{userToken}}
 
-### GET MOVIES
+### GET MOVIES - FILTERED
 GET {{host}}/{{movies}}?title=b&yearOfRelease=1995
 Content-Type: application/json
 #Authorization: Bearer {{userToken}}
+
+### GET MOVIES - SORTED
+GET {{host}}/{{movies}}?title=b&sortBy=yearofrelease
+Content-Type: application/json
+
+### GET MOVIES - SORTED
+GET {{host}}/{{movies}}?title=b&sortBy=title&yearofrelease=1997
+Content-Type: application/json
 
 
 

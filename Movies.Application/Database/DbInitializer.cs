@@ -50,34 +50,48 @@ public class DbInitializer
         """);
 
 
-        await EnsureData();
+        // await EnsureData();
     }
 
-    private async Task EnsureData()
+    private async Task EnsureData(int take = 100)
     {
-        var existingMovies = await _movieRepository.GetAllAsync(new()
+        var existingMovies = (await _movieRepository.GetAllAsync(new()
         {
             UserId = null,
             Title = null,
             YearOfRelease = null
-        });
+        })).ToHashSet();
+        
+        var newMovies = GetMoviesData()
+            .Where(m => existingMovies.All(em => em.Id != m.Id))
+            .Take(take)
+            .ToList();
 
-        var newMovies = GetMoviesData().Where(m => existingMovies.All(em => em.Id != m.Id)).Take(100).ToList();
 
         if (!newMovies.Any())
             return;
         
-        
-        Console.WriteLine($"Creating {newMovies.Count} movies ...");
+        Console.WriteLine($"Found {existingMovies.Count} existing movies");
+        Console.WriteLine($"Creating {newMovies.Count} new movies");
+
+
+        var counter = 0;
         
         foreach (var movie in newMovies)
         {
+            counter++;
+            
+            if (existingMovies.Any(x => x.Slug == movie.Slug))
+            {
+                Console.WriteLine($"Movie with slug {movie.Slug} already exists");
+                continue;
+            }
+            
             await _movieRepository.CreateAsync(movie);
-            Console.WriteLine($"Created movie: {movie.Title}, {movie.YearOfRelease}");
+            Console.WriteLine($"Created movie: {movie.Title}, {movie.YearOfRelease} ({counter}/{newMovies.Count})");
+            
+            existingMovies.Add(movie);
         }
-        
-        Console.WriteLine($"Created {newMovies.Count} movies!");
-
     }
 
     private static IEnumerable<Movie> GetMoviesData()
