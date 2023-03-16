@@ -43,8 +43,10 @@ public class MoviesController : ApiControllerBase
     {
         var options = request.MapToOptions(UserId);
         
-        var result = await _movieService.GetAllAsync(options, cancellationToken);
-        var response = result.MapToResponse();
+        var movies = await _movieService.GetAllAsync(options, cancellationToken);
+        var count = await _movieService.CountAsync(options.Title, options.YearOfRelease, cancellationToken);
+        
+        var response = movies.MapToResponse(request.Page, request.PageSize, count);
         
         return Ok(response);
     }

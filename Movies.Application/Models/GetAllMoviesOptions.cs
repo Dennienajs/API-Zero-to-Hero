@@ -8,6 +8,9 @@ public class GetAllMoviesOptions
     
     public string? SortField { get; init; }
     public SortOrder SortOrder { get; init; } = SortOrder.Unsorted;
+    
+    public int Page { get; init; }
+    public int PageSize { get; init; }
 }
 
 public enum SortOrder

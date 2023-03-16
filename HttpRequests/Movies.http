@@ -26,14 +26,12 @@ Content-Type: application/json
 #Authorization: Bearer {{userToken}}
 
 ### GET MOVIES - SORTED
-GET {{host}}/{{movies}}?title=b&sortBy=yearofrelease
-Content-Type: application/json
-
-### GET MOVIES - SORTED
 GET {{host}}/{{movies}}?title=b&sortBy=title&yearofrelease=1997
 Content-Type: application/json
 
-
+### GET MOVIES - PAGINATED
+GET {{host}}/{{movies}}?title=b&sortBy=title&page=34&pageSize=69
+Content-Type: application/json
 
 
 ### GET MOVIE - ID

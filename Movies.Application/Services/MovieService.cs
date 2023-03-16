@@ -12,6 +12,7 @@ public interface IMovieService
     Task<IEnumerable<Movie>> GetAllAsync(GetAllMoviesOptions options, CancellationToken cancellationToken = default);
     Task<Movie?> UpdateAsync(Movie movie, Guid? userId = default, CancellationToken cancellationToken = default);
     Task<bool> DeleteByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(string? title, int? yearOfRelease, CancellationToken cancellationToken = default);
 }
 
 public class MovieService : IMovieService
@@ -80,5 +81,10 @@ public class MovieService : IMovieService
     public async Task<bool> DeleteByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _movieRepository.DeleteByIdAsync(id, cancellationToken);
+    }
+    
+    public async Task<int> CountAsync(string? title, int? yearOfRelease, CancellationToken cancellationToken = default)
+    {
+        return await _movieRepository.CountAsync(title, yearOfRelease, cancellationToken);
     }
 }

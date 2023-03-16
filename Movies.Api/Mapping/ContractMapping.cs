@@ -25,9 +25,15 @@ public static class ContractMapping
         Genres = movie.Genres
     };
 
-    public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies) => new()
+    public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies, 
+        int page, 
+        int pageSize, 
+        int totalCount) => new()
     {
-        Items = movies.Select(movie => movie.MapToResponse())
+        Items = movies.Select(movie => movie.MapToResponse()),
+        Page = page,
+        PageSize = pageSize,
+        TotalCount = totalCount
     };
     
     public static Movie MapToMovie(this UpdateMovieRequest request, Guid id) => new()
@@ -61,6 +67,9 @@ public static class ContractMapping
             ? SortOrder.Unsorted 
             : request.SortBy.StartsWith('-') 
                 ? SortOrder.Descending 
-                : SortOrder.Ascending
+                : SortOrder.Ascending,
+        
+        Page = request.Page,
+        PageSize = request.PageSize
     };
 }

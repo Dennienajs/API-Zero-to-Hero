@@ -13,6 +13,7 @@ public interface IMovieRepository
     Task<bool> UpdateAsync(Movie movie, CancellationToken cancellationToken = default);
     Task<bool> DeleteByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task<bool> ExistsByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(string? title, int? yearOfRelease, CancellationToken cancellationToken = default);
 }
 
 public class MovieRepository : IMovieRepository
@@ -153,12 +154,16 @@ public class MovieRepository : IMovieRepository
             and  (@yearofrelease is null or m.yearofrelease = @yearofrelease)
             
             group by id, userrating {orderClause}
+            limit @pageSize 
+            offset @offset
             """, 
             new
             {
                 userId = options.UserId,
                 title = options.Title?.ToLower(),
-                yearofrelease = options.YearOfRelease
+                yearofrelease = options.YearOfRelease,
+                pageSize = options.PageSize,
+                offset = options.PageSize * (options.Page - 1)
             }, cancellationToken: token));
         
         return result.Select(x => new Movie
@@ -228,5 +233,21 @@ public class MovieRepository : IMovieRepository
         return await connection.ExecuteScalarAsync<bool>(new("""
             select count(1) from movies where id = @Id;
             """, new { id }, cancellationToken: cancellationToken));
+    }
+    
+    public async Task<int> CountAsync(string? title, int? yearOfRelease, CancellationToken cancellationToken = default)
+    {
+        using var connection = await _dbConnectionFactory.CreateConnectionAsync(cancellationToken);
+
+        return await connection.QuerySingleAsync<int>(new("""
+            select count(id) 
+            from movies m
+            where (@title is null or LOWER(m.title) like ('%' || @title || '%'))
+            and  (@yearofrelease is null or m.yearofrelease = @yearofrelease)
+            """, new
+        {
+            title,
+            yearOfRelease
+        }, cancellationToken: cancellationToken));
     }
 }
