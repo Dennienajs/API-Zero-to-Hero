@@ -1,3 +1,5 @@
+using Movies.Contracts.Responses.V1;
+
 namespace Movies.Contracts.Responses;
 
 public class MovieRatingsResponse

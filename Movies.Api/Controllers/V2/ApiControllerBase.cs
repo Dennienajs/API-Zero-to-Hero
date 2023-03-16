@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Movies.Api.Auth;
 
-namespace Movies.Api.Controllers;
+namespace Movies.Api.Controllers.V2;
 
 [ApiController]
 public class ApiControllerBase : ControllerBase
