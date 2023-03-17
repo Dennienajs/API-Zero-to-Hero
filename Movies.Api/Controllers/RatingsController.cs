@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Movies.Api.Mapping;
 using Movies.Application.Services;
@@ -5,6 +6,7 @@ using Movies.Contracts.Requests;
 
 namespace Movies.Api.Controllers;
 
+[ApiVersion(1.0)]
 public class RatingsController : AuthorizeControllerBase
 {
     private readonly IRatingService _ratingService;
