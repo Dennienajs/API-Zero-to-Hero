@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Movies.Api.Auth;
 using Movies.Api.Health;
+using Movies.Api.Logging;
 using Movies.Api.Mapping;
 using Movies.Api.Swagger;
 using Movies.Application;
@@ -116,6 +117,7 @@ app.UseOutputCache(); // By default it caches all GET (200 OK) responses for 1 h
 
 
 app.UseMiddleware<ValidationMappingMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
 app.MapControllers();
 
 
