@@ -1,4 +1,5 @@
 using Movies.Api.Endpoints.Movies;
+using Movies.Api.Endpoints.Ratings;
 
 namespace Movies.Api.Endpoints;
 

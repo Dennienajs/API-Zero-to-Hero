@@ -50,7 +50,7 @@ try
 
     var newMovie = await moviesApi.CreateMovieAsync(new()
     {
-        Title = "Bears, Beets, Battlestar Galctica 3000",
+        Title = "Bears, Beets, Battlestar Galctica 9001",
         YearOfRelease = 2024,
         Genres = new[]
         {

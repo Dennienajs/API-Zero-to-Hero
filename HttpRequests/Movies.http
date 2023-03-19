@@ -9,7 +9,7 @@ Authorization: Bearer {{adminToken}}
 
 
 {
-  "title": "Bears, Beets, Battlestar Galactica 2",
+  "title": "Bears, Beets, Battlestar Galactica 9",
   "yearOfRelease": "2024",
   "genres": [
     "Comedy",
@@ -37,20 +37,23 @@ GET {{host}}/{{movies}}?title=b&sortBy=title&page=34&pageSize=69
 Content-Type: application/json
 
 ### GET MOVIES - EXPLICIT API VERSION
-GET {{host}}/{{movies}}
+GET {{host}}/{{movies}}?title=baaa
 Content-Type: application/json;api-version=1.0
+#Content-Type: application/json;api-version=2.0
+#Content-Type: application/json;api-version=3.0 # `Unsupported Media Type`
+
 
 
 ### GET MOVIE - ID
-< {% request.variables.set("idOrSlug", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
+< {% request.variables.set("idOrSlug", "1797bff8-cca9-4f8a-92bd-a536d50ecb1e") %}
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
-#Authorization: Bearer {{userToken}}
+Authorization: Bearer {{userToken}}
 
 
 ### GET MOVIE - SLUG
-< {% request.variables.set("idOrSlug", "avengers-endgame-2019") %}
+< {% request.variables.set("idOrSlug", "bears-beets-battlestar-galactica-9-2024") %}
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
@@ -58,7 +61,7 @@ Content-Type: application/json
 
 
 ### UPDATE MOVIE
-< {% request.variables.set("id", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
+< {% request.variables.set("id", "1797bff8-cca9-4f8a-92bd-a536d50ecb1e") %}
 
 PUT {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
@@ -76,7 +79,7 @@ Authorization: Bearer {{adminToken}}
 
 
 ### DELETE MOVIE
-< {% request.variables.set("id", "6e06f3cc-7932-41bd-9d87-8b7d19ce1356") %}
+< {% request.variables.set("id", "1797bff8-cca9-4f8a-92bd-a536d50ecb1e") %}
 
 DELETE {{host}}/{{movies}}/{{id}}
 Content-Type: application/json

@@ -35,7 +35,15 @@ public static class ContractMapping
         PageSize = pageSize,
         TotalCount = totalCount
     };
-    
+
+    public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies, 
+        GetAllMoviesRequest request, 
+        int totalCount) =>
+        movies.MapToResponse(
+            request.Page.GetValueOrDefault(PagedRequest.DefaultPage), 
+            request.PageSize.GetValueOrDefault(PagedRequest.DefaultPageSize), 
+            totalCount);
+
     public static Movie MapToMovie(this UpdateMovieRequest request, Guid id) => new()
     {
         Id = id,
@@ -69,7 +77,7 @@ public static class ContractMapping
                 ? SortOrder.Descending 
                 : SortOrder.Ascending,
         
-        Page = request.Page,
-        PageSize = request.PageSize
+        Page = request.Page.GetValueOrDefault(PagedRequest.DefaultPage),
+        PageSize = request.PageSize.GetValueOrDefault(PagedRequest.DefaultPageSize)
     };
 }
