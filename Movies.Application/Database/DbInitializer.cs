@@ -37,14 +37,14 @@ public class DbInitializer
         
         await connection.ExecuteAsync(""" 
             CREATE TABLE IF NOT EXISTS genres (
-                movieId uuid references movies(Id),
+                movieId uuid references movies(Id) ON DELETE CASCADE,
                 name text NOT NULL);
         """);
         
         await connection.ExecuteAsync(""" 
             CREATE TABLE IF NOT EXISTS ratings (
                 userId uuid,
-                movieId uuid references movies(Id),
+                movieId uuid references movies(Id) ON DELETE CASCADE,
                 rating int NOT NULL,
                 PRIMARY KEY (userId, movieId));
         """);

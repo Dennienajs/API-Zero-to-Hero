@@ -217,6 +217,10 @@ public class MovieRepository : IMovieRepository
             delete from genres where movieId = @Id;
             """, new { id }, cancellationToken: cancellationToken));
         
+        await connection.ExecuteAsync(new("""
+            delete from ratings where movieId = @Id;
+            """, new { id }, cancellationToken: cancellationToken));
+        
         var result = await connection.ExecuteAsync(new("""
             delete from movies where id = @Id
             """, new { id }, cancellationToken: cancellationToken));

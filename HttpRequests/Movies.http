@@ -5,6 +5,8 @@
 POST {{host}}/{{movies}}
 Content-Type: application/json
 Authorization: Bearer {{adminToken}}
+#x-api-key: {{apiKey}}
+
 
 {
   "title": "Bears, Beets, Battlestar Galactica 2",
@@ -19,7 +21,7 @@ Authorization: Bearer {{adminToken}}
 ### GET MOVIES
 GET {{host}}/{{movies}}
 Content-Type: application/json
-Authorization: Bearer {{userToken}}
+#Authorization: Bearer {{userToken}}
 
 ### GET MOVIES - FILTERED
 GET {{host}}/{{movies}}?title=b&yearOfRelease=2024
@@ -78,5 +80,6 @@ Authorization: Bearer {{adminToken}}
 
 DELETE {{host}}/{{movies}}/{{id}}
 Content-Type: application/json
-Authorization: Bearer {{userToken}}
+#x-api-key: {{apiKey}}
+Authorization: Bearer {{adminToken}}
 

@@ -2,7 +2,7 @@ namespace Movies.Api.Auth;
 
 public static class IdentityExtensions
 {
-    private const string UserIdClaimType = "userid";
+    public const string UserIdClaimType = "userid";
     
     public static Guid? GetUserId(this HttpContext context)
     {

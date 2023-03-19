@@ -38,7 +38,12 @@ builder.Services
 builder.Services
     .AddAuthorization(x =>
     {
-        x.AddPolicy(AuthConstants.AdminUserPolicyName, policy => policy.RequireClaim(AuthConstants.AdminUserClaimName, "true"));
+        // x.AddPolicy(AuthConstants.AdminUserPolicyName, policy => policy.RequireClaim(AuthConstants.AdminUserClaimName, "true"));
+        x.AddPolicy(AuthConstants.AdminUserPolicyName, policy =>
+        {
+            policy.AddRequirements(new AdminAuthRequirement(config["ApiKey"]!));
+        });
+        
         x.AddPolicy(AuthConstants.TrustedMemberPolicyName, policy =>
         {
             policy.RequireAssertion(context =>
@@ -49,6 +54,7 @@ builder.Services
         });
     });
 
+builder.Services.AddScoped<AuthKeyAuthFilter>();
 
 builder.Services.AddApiVersioning(x =>
 {
@@ -58,7 +64,8 @@ builder.Services.AddApiVersioning(x =>
     x.ApiVersionReader = new MediaTypeApiVersionReader("api-version");
 }).AddMvc().AddApiExplorer();
 
-builder.Services.AddCors();
+// builder.Services.AddCors();
+// builder.Services.AddResponseCaching();
 builder.Services.AddOutputCache(x =>
 {
     x.AddBasePolicy(c => c.Cache());
@@ -72,7 +79,8 @@ builder.Services.AddOutputCache(x =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddHealthChecks()
+builder.Services
+    .AddHealthChecks()
     .AddCheck<DatabaseHealthCheck>(DatabaseHealthCheck.Name);
 
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
@@ -102,11 +110,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Important: sequence matters!
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+//app.UseCors();
+//app.UseResponseCaching();
 app.UseOutputCache(); // By default it caches all GET (200 OK) responses for 1 hour.
 
 
