@@ -1,0 +1,14 @@
+version: "3.9"
+
+services: 
+  
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=Movies
+        
+    ports:
+      - "5432:5432"
