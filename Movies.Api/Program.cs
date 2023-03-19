@@ -58,6 +58,18 @@ builder.Services.AddApiVersioning(x =>
     x.ApiVersionReader = new MediaTypeApiVersionReader("api-version");
 }).AddMvc().AddApiExplorer();
 
+builder.Services.AddCors();
+builder.Services.AddOutputCache(x =>
+{
+    x.AddBasePolicy(c => c.Cache());
+    
+    x.AddPolicy("MovieCache", c => 
+        c.Cache()
+            .Expire(TimeSpan.FromMinutes(1))
+            .SetVaryByQuery(new []{"title", "yearOfRelease", "sortBy", "page", "pageSize"})
+            .Tag("movies"));
+});
+
 builder.Services.AddControllers();
 
 builder.Services.AddHealthChecks()
@@ -89,6 +101,14 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Important: sequence matters!
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+app.UseOutputCache(); // By default it caches all GET (200 OK) responses for 1 hour.
+
 
 app.UseMiddleware<ValidationMappingMiddleware>();
 app.MapControllers();

@@ -4,12 +4,13 @@
 ### CREATE MOVIE
 POST {{host}}/{{movies}}
 Content-Type: application/json
-Authorization: Bearer {{trustedToken}}
+Authorization: Bearer {{adminToken}}
 
 {
-  "title": "Avengers: Endgame",
-  "yearOfRelease": "2019",
+  "title": "Bears, Beets, Battlestar Galactica 2",
+  "yearOfRelease": "2024",
   "genres": [
+    "Comedy",
     "Action"
   ]
 }
@@ -21,7 +22,7 @@ Content-Type: application/json
 Authorization: Bearer {{userToken}}
 
 ### GET MOVIES - FILTERED
-GET {{host}}/{{movies}}?title=b&yearOfRelease=1995
+GET {{host}}/{{movies}}?title=b&yearOfRelease=2024
 Content-Type: application/json
 #Authorization: Bearer {{userToken}}
 
@@ -43,7 +44,7 @@ Content-Type: application/json;api-version=1.0
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
-Authorization: Bearer {{userToken}}
+#Authorization: Bearer {{userToken}}
 
 
 ### GET MOVIE - SLUG
@@ -51,7 +52,7 @@ Authorization: Bearer {{userToken}}
 
 GET {{host}}/{{movies}}/{{idOrSlug}}
 Content-Type: application/json
-Authorization: Bearer {{userToken}}
+#Authorization: Bearer {{userToken}}
 
 
 ### UPDATE MOVIE
