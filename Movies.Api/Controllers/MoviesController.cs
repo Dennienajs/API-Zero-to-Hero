@@ -25,7 +25,7 @@ public class MoviesController : ApiControllerBase
     }
 
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
-    [HttpPost(Endpoints.Movies.Create)]
+    [HttpPost(ApiEndpoints.Movies.Create)]
     [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateMovieRequest request, CancellationToken cancellationToken)
@@ -38,7 +38,7 @@ public class MoviesController : ApiControllerBase
         return CreatedAtAction(nameof(Get), new { idOrSlug = movie.Id }, movie.MapToResponse());
     }
     
-    [HttpGet(Endpoints.Movies.Get)]
+    [HttpGet(ApiEndpoints.Movies.Get)]
     [OutputCache(PolicyName = "MovieCache")]
     [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,7 +53,7 @@ public class MoviesController : ApiControllerBase
             : NotFound();
     }
 
-    [HttpGet(Endpoints.Movies.GetAll)]
+    [HttpGet(ApiEndpoints.Movies.GetAll)]
     [OutputCache(PolicyName = "MovieCache")]
     [ProducesResponseType(typeof(MoviesResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll([FromQuery] GetAllMoviesRequest request, CancellationToken cancellationToken)
@@ -69,7 +69,7 @@ public class MoviesController : ApiControllerBase
     }
 
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
-    [HttpPut(Endpoints.Movies.Update)]
+    [HttpPut(ApiEndpoints.Movies.Update)]
     [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
@@ -89,7 +89,7 @@ public class MoviesController : ApiControllerBase
     }
     
     [Authorize(AuthConstants.AdminUserPolicyName)]
-    [HttpDelete(Endpoints.Movies.Delete)]
+    [HttpDelete(ApiEndpoints.Movies.Delete)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
