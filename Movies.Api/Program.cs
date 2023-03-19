@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Movies.Api.Auth;
+using Movies.Api.Endpoints;
 using Movies.Api.Health;
 using Movies.Api.Logging;
 using Movies.Api.Mapping;
@@ -78,7 +79,7 @@ builder.Services.AddOutputCache(x =>
             .Tag("movies"));
 });
 
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
 
 builder.Services
     .AddHealthChecks()
@@ -118,7 +119,9 @@ app.UseOutputCache(); // By default it caches all GET (200 OK) responses for 1 h
 
 app.UseMiddleware<ValidationMappingMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
-app.MapControllers();
+
+// app.MapControllers();
+app.MapApiEndpoints();
 
 
 await app.Services

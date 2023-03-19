@@ -1,6 +1,6 @@
 namespace Movies.Api;
 
-public static class Endpoints
+public static class ApiEndpoints
 {
     private const string ApiBase = "api";
     private const string Id = "{id:guid}";
